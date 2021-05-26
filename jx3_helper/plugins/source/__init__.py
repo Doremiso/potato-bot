@@ -11,5 +11,10 @@ db = None
 async def init_db():
     nonebot.logger.info("init db")
     global db
-    db = AsyncIOMotorClient("mongodb://flypotato:tudou123@test.xsvcm.mongodb.net/test", serverSelectionTimeoutMS=3)['jx3_helper']
+    mongodb_uri = driver.config.mongodb_uri
+    if mongodb_uri:
+        db = AsyncIOMotorClient(mongodb_uri, serverSelectionTimeoutMS=3)['jx3_helper']
+    else:
+        nonebot.logger.error("mongodb_uri not found!")
+        sys.exit()
 
