@@ -20,9 +20,12 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
 @material.got('name', prompt="请输入想查询的材料名称")
 async def handle_name(bot: Bot, event: Event, state: T_State):
     name = state['name']
-    material_list = await get_material(name)
-    for material_info in material_list:
-        await material.send(material_info)
+    code, info = await get_material(name)
+    if code:
+        for material_info in info:
+            await material.send(material_info)
+    else:
+        await material.send(info)
     await material.finish()
 
 
@@ -31,6 +34,10 @@ async def get_material(name: str):
         driver = nonebot.get_driver()
         res = await client.get(driver.config.datacenter + f"/api/laisha2/?method=get_material_info&name={name}")
         material_list = list()
-        for material_info in json.loads(res.text)['materials']:
-            material_list.append(f"名称:{material_info['name']}, 类型: {material_info['type']}, 地区:{material_info['addr']}")
-    return material_list
+        _json = json.loads(res.text)
+        if _json['code']:
+            for material_info in _json['materials']:
+                material_list.append(f"名称:{material_info['name']}, 类型: {material_info['type']}, 地区:{material_info['addr']}")
+            return 1, material_list
+        else:
+            return 0, _json['info']
