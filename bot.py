@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import nonebot
-from nonebot.adapters import Bot
+from nonebot.adapters.cqhttp import Bot
 
 # Custom your logger
 # 
