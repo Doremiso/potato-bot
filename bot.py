@@ -21,6 +21,7 @@ driver = nonebot.get_driver()
 driver.register_adapter("cqhttp", CQHTTPBot)
 
 nonebot.load_plugins("src/plugins")
+nonebot.load_plugins("jx3_helper/plugins")
 # nb plugin install nonebot_plugin_test
 # 前端测试插件
 nonebot.load_plugin("nonebot_plugin_test")
