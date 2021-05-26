@@ -10,6 +10,10 @@ Python： 3.8.5
 - 修改.env配置
   
   `ENVIRONMENT=prod`
+  
+- 增加数据库配置
+  `MONGODB_URI=mongodb://...`
+  
 - 若使用自己搭建的datacenter服务器，需要修改.env.prod
   
   `DATACENTER=http://xxxxx.com`
