@@ -11,7 +11,5 @@ db = None
 async def init_db():
     nonebot.logger.info("init db")
     global db
-    db = AsyncIOMotorClient('localhost', 27017, serverSelectionTimeoutMS=3)['jx3_helper']
-
-
+    db = AsyncIOMotorClient("mongodb://flypotato:tudou123@test.xsvcm.mongodb.net/test", serverSelectionTimeoutMS=3)['jx3_helper']
 
