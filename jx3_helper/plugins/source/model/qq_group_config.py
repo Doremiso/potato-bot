@@ -5,7 +5,6 @@ class QQGroupConfig:
     def __init__(self):
         from ...source import db
         if db:
-            print(db)
             self.table = db['QQGroupConfig']
         else:
             nonebot.logger.error("数据库未初始化！")
