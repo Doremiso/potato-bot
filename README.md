@@ -4,7 +4,8 @@
 框架：
 [nonebot2](https://github.com/nonebot/nonebot2)
 
-Python： 3.8.5
+Python：3.9
+DB：MongoDB
 
 ### 使用说明
 - 修改.env配置
