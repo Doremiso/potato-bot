@@ -11,16 +11,22 @@ weekly = on_command("周常", priority=5)
 
 @daily.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State):
-    group_id = event.dict()['group_id']
+    try:
+        group_id = event.dict()['group_id']
+    except KeyError:
+        group_id = None
     msg = await get_daily(group_id)
     await daily.finish(msg)
 
 
 async def get_daily(group_id):
     async with httpx.AsyncClient() as client:
-        qq_group_config = QQGroupConfig()
-        # 根据群号获取服务器
-        server = await qq_group_config.get_server(group_id)
+        if group_id:
+            qq_group_config = QQGroupConfig()
+            # 根据群号获取服务器
+            server = await qq_group_config.get_server(group_id)
+        else:
+            server = None
         if server:
             res = await client.get(f"https://jx3api.com/app/daily?server={server}")
         else:
