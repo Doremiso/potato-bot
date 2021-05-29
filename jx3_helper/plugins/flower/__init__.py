@@ -14,7 +14,7 @@ import time
 import json
 
 
-flower_price = on_command("花价", rule=to_me(), priority=5)
+flower_price = on_command("花价", priority=5)
 
 
 @flower_price.handle()
